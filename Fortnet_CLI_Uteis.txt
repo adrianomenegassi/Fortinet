@@ -1,0 +1,610 @@
+snmp - MIBs
+
+#CPU
+snmpwalk -c iMC-public -v 2c 172.17.0.2 1.3.6.1.4.1.12356.101.4.1.3
+#MEM
+snmpwalk -c iMC-public -v 2c 172.17.0.2 1.3.6.1.4.1.12356.101.4.1.4.0
+#Concurrent Sessions
+snmpwalk -c iMC-public -v 2c 172.17.0.2 1.3.6.1.4.1.12356.101.4.1.8.0
+
+IPS Sensor (Intrusions blocked) - .1.3.6.1.4.1.12356.101.9.2.1.1.2.1
+Viruses Blocked - .1.3.6.1.4.1.12356.101.8.2.1.1.4.1
+
+
+1.3.6.1.4.1.12356.101.12.2.3.1.2.1 = Active SSL VPN users
+1.3.6.1.4.1.12356.101.10.100.4.0 = HTTP session count
+1.3.6.1.4.1.12356.101.4.1.8.0 = Session counts
+1.3.6.1.4.1.12356.101.12.2.3.1.6.1 = SSL VPN active tunnels
+1.3.6.1.4.1.12356.101.12.2.3.1.2.1 = SSL VPN active users
+1.3.6.1.4.1.12356.101.4.1.3.0 = CPU usage
+1.3.6.1.4.1.12356.101.4.1.7.0 = Disk Capacity
+1.3.6.1.4.1.12356.101.4.1.6.0 = Disk Usage
+1.3.6.1.4.1.12356.101.4.1.9.0 = Low Memory Usage
+1.3.6.1.4.1.12356.101.4.1.4.0 = Memory Usage
+
+1.3.6.1.4.1.12356.101.13.2.1.1 = fg Ha Stats Entry
+
+https://iphostmonitor.com/mib/FORTINET-FORTIGATE-MIB.html
+
+##Cheatsheet for FortiGate Command Line Interface CLI.
+http://www.ideaio.ch/posts/cheatsheet-fortigate-cli.html
+
+http://cookbook.fortinet.com/preventing-certificate-warnings-cacert-56/
+
+http://cookbook.fortinet.com/sysadmins-notebook/supported-upgrade-paths-fortios/2/
+
+#Sniffer Mac-addr
+http://kb.fortinet.com/kb/viewContent.do?externalId=11186
+
+Filtered can be used to display packets based on their content, using hexadecimal byte position.
+
+Match TTL = 1
+# diagnose sniffer packet port2 "ip[8:1] = 0x01"
+
+Match Source IP address = 192.168.1.2:
+# diagnose sniffer packet internal "(ether[26:4]=0xc0a80102)"
+
+Match Source MAC = 00:09:0f:89:10:ea
+# diagnose sniffer packet internal "(ether[6:4]=0x00090f89) and (ether[10:2]=0x10ea)"
+
+Match Destination MAC = 00:09:0f:89:10:ea
+# diagnose sniffer packet internal "(ether[0:4]=0x00090f89) and (ether[4:2]=0x10ea)"
+
+Match ARP packets only
+# diagnose sniffer packet internal "ether proto 0x0806"
+
+TCP or UDP flags can be addressed using the following:
+
+Match packets with RST flag set:
+# diagnose sniffer packet internal "tcp[13] & 4 != 0"
+
+Match packets with SYN flag set:
+# diagnose sniffer packet internal "tcp[13] & 2 != 0"
+
+Match packets with SYN-ACK flag set:
+# diagnose sniffer packet internal "tcp[13] = 18"
+
+
+#74:27:ea:76:16:91
+diagnose sniffer packet any "(ether[6:4]=0x07427ea76) and (ether[10:2]=0x1691)"
+
+diagnose sniffer packet any "((ether[0:4]=0x80656d54) and (ether[4:2]=0x0287)) or ((ether[6:4]=0x80656d54) and (ether[10:2]=0x0287))" 4
+
+nmap -sU -p 161 -Pn --open 10.32.23.0/24
+
+## Saida dos comandos config web
+diagnose debug cli 5
+diagnose debug enable
+
+Here is some Tshoot CLI comparion: *i will update this table soon
+
+Fortigate 							Cisco
+show full-configuration 			show run
+execute factory-reset 				write erase
+show system interface 				show run interface brief
+diagnose hardware deviceinfo nic 	show interface
+fnsysctl ifconfig wan1
+get hardware nic 
+get system status 					show version
+get system performance status		show uptime
+get system arp | diag ip arp list  	show arp
+get router info routing-table all  	show ip route
+diagnose system session list	 	show ip nat translation
+diagnose system session clear 		clear ip nat translation
+get router info ospf neighbor 		show ip ospf neighbor
+get router info bgp neighbor 		show ip bgp neighbor
+get router info bgp summary 		show ip bgp summary
+
+Monitoring commands:
+show	#Show global or vdom config
+show system interface	#Equivalent to show run interface
+diagnose hardware deviceinfo nic	#Equivalent to show interface
+get system status	#show version information
+show firewall policy 6	#show firewall rule numer 6
+show router policy	#Show Policy Routing rules
+diagnose system session list	#Show the excisting translations
+diagnose system session clear	#Clears all xlate/translations
+diagnose ip arp list	#Shows the arp table of connected hosts
+get router info routing-table all	#Equivalent to ‘show ip route’
+diagnose system top		#Show System Processes running with PIDs
+diagnose system kill 9 <id>		#Kill the specific PID
+diag test auth ldap <server_name> <username> <password>		#Ldap test query from the Forti to the AD
+
+
+#Tac Report util
+get sys status
+diag sys top-summary "-n 30 -i 5 -s mem"
+diag sys top
+diag hard sys mem
+diag hard sys shm
+diag hardware sysinfo slab
+diag firewall statistics show
+get sys performance firewall packet-distribution
+get sys performance firewall statistics
+diagnose sys session full-stat 
+
+execute disk scan 17
+
+#Freshing install
+execute factoryreset
+execute formatlogdisk 
+
+diagnose debug config-error-log read
+
+execute tac report
+
+#Show config
+FW1_EXT $ show full-configuration
+
+#Backup and Restore
+FW1_EXT $ execute backup config tftp fortnet_fw1_25.07.14.cfg 10.32.18.70 
+
+FW1_EXT $ execute restore config tftp fortnet_fw1_25.07.14.cfg 10.32.18.70
+`
+execute restore image tftp FGT_60D-v5-build0718-FORTINET.out 10.32.18.70
+
+
+#Remover switch virtual
+config system dhcp server
+ delete 1
+end	
+config firewall policy
+ delete 1
+end
+config system virtual-switch
+  delete internal
+end
+
+#
+config vdom
+ edit root
+ 
+ diag sniffer packet any 'host 10.32.15.6' 4 999
+ diag sniffer packet any 'host 10.32.15.6' 6 999
+ 
+ diagnose sniffer packet REDE-CORE 'not host 172.16.0.67' 6
+ diagnose sniffer packet V_GER_REDES 'broadcast' 6
+ 
+ diagnose sniffer packet MGMT_VM 'src net 172.17.1.0/24 and dst net 172.17.1.0/24 and ip'
+ diagnose sniffer packet MGMT_VM 'src net 172.17.1.0/24 and dst net 172.17.1.0/24 and ip and not host 172.17.1.255' 6
+ 
+#Mac-addr
+get sys arp
+diag ip arp list
+
+diagnose ip arp list | grep 192.168.200.158
+diagnose ip arp delete V_GER_REDES 192.168.200.158
+
+diagnose ip arp list | grep PPP
+
+FW1_INT (root) # get system arp | grep 10.96.
+10.96.1.2         0          90:6c:ac:74:ca:09 port23
+10.96.3.2         0          90:6c:ac:c1:5b:ab PPP_COPEL_LNDA
+
+#Top
+config global 
+get sys performance top
+diagnose sys top-summary
+diag sys kill 11 pid
+
+fnsysctl kill –9 process_id
+
+diag sys top-summary '-s mem'
+
+diag sys top-summary "-n 30 -i 5 -s mem"
+
+diag sys top 5 30
+
+get system admin list 
+execute disconnect-admin-session
+
+
+#Linux command
+fnsysctl ifconfig
+fnsysctl cat /proc/net/dev
+
+#Mostrar config
+FW1_INT (root) # show firewall policy
+
+#Info system.
+FW1_INT (root) # get system status
+
+#Show Vlans
+FW1_INT (global) # show system interface | grep "edit\|vlanid"
+
+#Clear counters Policy
+diag firewall iprope clear 100004 <policy-id>
+
+### DHCP
+show system dhcp server
+diag firewall ipmac list
+exec dhcp lease-list
+
+config system global
+ set gui-dhcp-advanced enable
+
+diagnose debug application dhcprelay 7
+
+diagnose debug application dhcps -1
+
+diagnose sniffer packet P_A06_CALL_VOZ 'port 67 and port 68' 3
+
+# reserva Unicesumar Acesso
+config system dhcp server
+ edit 9
+ config reserved-address
+ edit 0
+ set ip 10.16.8.120
+ set mac 24:e3:14:29:4c:aa
+ set description "iPhone Reitoria"
+ end
+end
+ 
+#routing table
+get router info routing-table details 8.8.8.8
+#Embratel - execute ping-options source 200.250.3.146
+#GVT - execute ping-options source 189.115.48.234
+#Fibercom - execute ping-options source 191.7.189.98
+#Oi - execute ping-options source 189.75.192.10
+#pool_Oi_189.75.192.10
+
+FW1_EXT (root) # execute ping 200.250.3.146
+
+#BGP
+show router route-map
+
+Neighbor        V         AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+187.16.201.252  4      20121      92     106        9    0    0 00:04:34        0
+187.16.201.253  4      26162    1405      83        8    0    0 00:04:42     3268
+187.16.201.254  4      26162    1406      83        7    0    0 00:04:48     3268
+189.115.48.233  4      18881  448771    3558        3    0    0 2d03h47m   650137
+191.7.189.97    4     263329  960624    7143        5    0    0 2d03h46m   662704
+200.250.3.145   4       4230   16987      75       10    0    0 00:02:32    99514
+
+get router info bgp neighbors
+get router info bgp neighbors 200.250.3.145 advertised-routes
+get router info bgp neighbors 191.7.189.97 advertised-routes
+
+get router info bgp network
+get router info bgp network 41.63.160.0
+get router info bgp network 8.8.8.8
+get router info routing-table bgp | grep 41.63.160
+
+execute router clear bgp as 4230 soft
+
+execute router clear bgp ip 191.7.189.97 soft in 
+
+execute router clear bgp dampening 10.10.0.0/16
+
+diag ip router bgp all enable
+diag ip router bgp show
+
+diagnose debug enable
+diagnose debug disable
+
+diagnose ip route list | grep 172.16.1.
+
+### Uteis BGP
+Expressões regulares para uso com BGP
+http://blog.ine.com/2008/01/06/understanding-bgp-regular-expressions/
+
+Exemplo de configuração e uso com o FortiGate
+https://travelingpacket.com/2014/07/17/fortinet-ap-path-filtering-with-regular-expressions/
+
+Site para informações sobre AS
+https://bgp.he.net/AS<número_do_AS>#
+
+
+Comandos úteis:
+
+Traz as correspondências de caminhos de AS do regex
+get router info bgp regexp <regex>
+
+Estrutura de routemap:
+
+Configuração BGP (config router bgp)
+	Configuração de peer (config neighbor)
+		Access List (config router access-list - na configuração do peer, define quais redes serão propagadas ou recebidas com base em access-lists)
+		RouteMAP (config router route-map - trata-se de uma política de roteamento, com base em AS-Path List, Access List, Prefixos e etc... é a opção que permite maior granularidade e controle)
+			AS-path (config router aspath-list)
+			Access List (config router access-list)
+			
+			
+# VPN
+get vpn ipsec tunnel summary 
+
+execute vpn sslvpn 
+
+#IPSec
+config vdom
+edit VDOM_VPN
+config vpn ipsec phase1-interface
+edit "Polo-P14-MAUA"
+set remote-gw 179.126.62.47
+next
+end
+
+#
+config vpn ssl settings 
+set route-source-interface disable
+#
+
+#H.A
+http://help.fortinet.com/fos50hlp/54/Content/FortiOS/fortigate-high-availability-52/HA_config_troubleshooting.htm
+http://help.fortinet.com/fos50hlp/54/Content/FortiOS/fortigate-high-availability-52/HA_failoverSyncConfig.htm
+http://kb.fortinet.com/kb/documentLink.do?externalID=FD36494
+
+On the Master unit:
+
+    execute ha synchronize stop
+    diag debug reset
+    diag debug enable
+    diagnose debug console timestamp enable
+    diag debug application hasync -1
+    diag debug application hatalk -1
+    execute ha synchronize start
+
+
+On Backup Units:
+
+    dia debug reset
+    diag debug enable
+    diag debug application hasync -1
+    diag debug application hatalk -1
+    execute ha synchronize start
+
+diag debug disable
+diag debug reset
+
+config global
+get system ha status
+diagnose sys ha cluster-csum
+diagnose sys ha checksum cluster 
+execute ha synchronize start
+
+diagnose sys ha checksum test
+diagnose sys ha checksum show root
+diagnose sys ha checksum show root firewall.service.custom
+
+execute ha manage 0
+execute ha manage 1
+
+diagnose sys ha reset-uptime
+
+diag deb appli hasync -10
+diag deb enable
+
+1. Dump all states of debug switches.
+2. Turn off all debug switches.
+3. Toggle debug switch of hsync core.
+4. Toggle debug switch of ha-diff.
+5. Toggle debug switch of FIB.
+6. Toggle debug switch of route6.
+7. Toggle debug switch of BYOD.
+8. Toggle debug switch of endpoint_compliance.
+9. Toggle debug switch of NEB.
+10. Toggle debug switch of zebos.
+11. Toggle debug switch of haconf.
+12. Toggle debug switch of proxy.
+13. Toggle debug switch of time.
+14. Toggle debug switch of snmp.
+15. Toggle debug switch of gtp.
+16. Toggle debug switch of auth.
+17. Toggle debug switch of IPsec.
+18. Toggle debug switch of fdb.
+19. Toggle debug switch of arp.
+20. Toggle debug switch of hastats.
+31. Toggle debug switch of source code information.
+50. Dump ha sync statistics.
+51. Dump FIB information..
+52. Dump multicast information.
+53. Dump extfile's signature.
+54. Recalculate external files signature.
+
+config global
+ fnsysctl cat /var/run/hasync.pid
+ diag sys kill 9 <pid>
+
+#Verify Disk
+ get system status
+ get hardware status
+ diagnose hardware deviceinfo disk
+ execute disk list
+ diagnose hardware sysinfo memory
+ fnsysctl df -k 
+
+
+#Devices
+diagnose user device os-summary
+diagnose user device get c8:9c:dc:f5:1e:f2
+
+#IPS
+#
+diag test application ipsmonitor 99
+exec update-ips
+diagnose sys top
+ 
+IPS Engine Test Usage:
+
+   97: Start all IPS engines
+   98: Stop all IPS engines
+   99: Restart all IPS engines and monitor 
+
+#Diag
+get vpn ipsec tunnel summary 
+
+diagnose vpn ike status detailed
+
+diagnose vpn ike log-filter dst-addr4 201.22.95.161
+
+diag debug app ike -1
+diag debug console timestamp enable
+diagnose debug enable
+
+diagnose vpn ike log-filter list
+
+diagnose debug reset
+diagnose debug disable
+
+diagnose hardware sysinfo shm
+
+diagnose debug crashlog read
+diagnose debug config-error-log read
+
+
+#url-filter
+ diagnose debug reset
+ diagnose debug urlfilter src-addr <IP address of test PC>
+ diagnose debug application urlfilter -1
+ diagnose debug enable
+
+ diagnose debug disable
+
+#Fortiguard
+
+FW2_EXT (global) # diagnose debug application update -1
+FW2_EXT (global) # diagnose debug enable 
+FW2_EXT (global) # execute update-now
+
+diagnose debug rating
+
+#Flow
+diagnose debug flow filter addr 10.32.18.1
+diagnose debug flow filter port 80
+diagnose debug flow show console enable
+diagnose debug flow trace start 100
+diagnose debug enable
+
+ diagnose debug disable
+
+#NetFlow / sFlow
+
+con global
+config system sflow
+ set collector-ip 172.16.1.127
+ set collector-port 9020
+ set source-ip <source-ip>
+end
+end
+
+config vdom
+edit root
+config system interface
+ edit "BGP_GVT"
+ set sflow-sampler enable
+ set sample-rate 1024
+ set polling-interval 60
+end
+end 
+
+# Diag de Sessões Ativas
+diag sys session filter dst <IP>
+diag sys session list
+
+diag sys session filter src 10.16.8.27
+diag sys session list
+diag sys session clear
+
+diag firewall auth filter user RODRIGO.REIS
+diag firewall auth list
+diag firewall auth clear
+
+diagnose debug authd fsso list | grep RODRIGO
+
+diag test authserver radius FAC-UNICESUMAR mschap2 wsus password
+
+diag test authserver radius FAC_5_UNICESUMAR mschap2 wsus password
+
+diagnose test authserver ldap DC1 wsus password
+
+get system session list | grep 172.16.4.113 -c
+diagnose sys session list | grep -c 172.16.4.113:80(0.0.0.0:0)
+diagnose sys session list | grep -c 172.16.4.112:80(0.0.0.0:0)
+
+FW2_EXT (root) # diagnose netlink interface list | grep index=50
+if=BGP_FBC family=00 type=1 index=50 mtu=1500 link=0 master=0
+
+#Verificar Shaper
+diagnose firewall shaper per-ip-shaper list
+
+#Guest - Vouchers
+
+diagnose test guest list
+#
+#user_id=59624-94210
+#user_name=Reitoria
+#password=59624-94210
+#mobile_phone=
+#sponsor=Unicesumar
+#company=
+#email=86400
+#expire=0 seconds after first successful login
+#comment=Reitoria
+#
+
+diagnose test guest add Guest-Wifi 59624-94210 Reitoria 59624-94210 '' '' Unicesumar '' 86400 Reitoria
+diagnose test guest add Guest-Wifi reitoria01 Reitoria ies94pw! '' Fatima Unicesumar '' 259200 Reitoria
+diagnose test guest add Guest-Wifi reitoria05 Reitoria ies94pw! '' '' Unicesumar '' 2592000 Reitoria
+
+diagnose test guest add Guest-CSTI consultores.eventials Diogo.Perussi #unicesumar '' '' Unicesumar '' 86400 SR380616
+______________________________________
+
+FW1_INT (global) # get hardware nic port40 | grep Current
+Current_HWaddr  :00:09:0f:09:14:28
+
+______________________________________
+#
+config vdom
+edit root 
+#
+config firewall policy 
+edit 86
+append srcaddr Host_10.32.18.70
+end
+
+config firewall policy 
+edit 86
+unselect srcaddr Host_10.32.18.70
+end
+
+#Intervdom - VPN
+config firewall policy 
+edit 402
+set auto-asic-offload disable 
+
+
+
+######## FAZ - FortiAnalyzer
+http://help.fortinet.com/fa/cli-olh/5-6-2/Document/1600_diagnose/test+.htm
+
+diagnose sys fsck harddisk
+
+diagnose test application fazsvcd 99
+
+fazsvcd <integer> ...
+Fazsvcd daemon test usage:
+    1: show PID
+    2: show daemon stats and status
+    3: list async search threads
+    4: dump async search slot info
+    5: show cache builder stats
+    6: dump cache builder playlist
+    7: dump log search filters
+    10: show database log stats aggregated per day
+    11: show received log stats aggregated per day
+    50: enable or disable cache builder
+    51: enable or disable auto custom index
+    52: enable or disable skip-index usage
+    60: rawlog idx cache test
+    61: logbrowse cache stats
+    70: show stats for device vdom cache
+    99: restart daemon
+	
+diagnose system print uptime 
+
+execute top -d 5 -n 30
+
+
+######## FORTIWEB
+
+diagnose network sniffer port1 'port 53' 6
