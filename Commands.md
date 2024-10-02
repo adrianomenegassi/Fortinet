@@ -1,4 +1,3 @@
-https://github.com/adrianomenegassi/Fortinet/pull/2#issue-2561777950
 Comandos Uteis TXT: https://github.com/adrianomenegassi/Fortinet/pull/2
 
 ### Cheatsheet for FortiGate Command Line Interface CLI
