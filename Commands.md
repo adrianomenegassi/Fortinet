@@ -29,3 +29,13 @@ diagnose debug flow show function-name enable
 diagnose debug flow trace start 100
 diagnose debug enable
 ```
+### Grep
+> Busca com Grep duas palavras "name" e "addr"
+```
+get vpn ike gateway | grep -f "name\|addr"
+
+```
+> Busca com Grep full informações
+```
+get vpn ike gateway | grep -f
+```
