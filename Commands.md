@@ -1,4 +1,4 @@
-Comandos Uteis TXT: https://github.com/adrianomenegassi/Fortinet/pull/2
+[Comandos Uteis TXT:] (https://github.com/adrianomenegassi/Fortinet/pull/2)
 
 ### Cheatsheet for FortiGate Command Line Interface CLI
  > Sites Uteis
