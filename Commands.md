@@ -1,5 +1,4 @@
-git remote add origin https://github.com/adrianomenegassi/Fortinet/pull/2
-git push origin main https://github.com/adrianomenegassi/Fortinet/pull/2
+Comandos Uteis TXT: https://github.com/adrianomenegassi/Fortinet/pull/2
 
 ### Cheatsheet for FortiGate Command Line Interface CLI
  > Sites Uteis
