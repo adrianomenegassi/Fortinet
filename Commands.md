@@ -50,6 +50,19 @@ get vpn ike gateway | grep -f "name\|addr"
 ```
 get vpn ike gateway | grep -f
 ```
+### Chavear Caixa HA
+> Verificar integridade e chavear entre as caixas HA
+```
+get system ha status
+```
+```
+execute ha failover set 1
+```
+```
+execute ha failover unset 1
+```
+
+
 
 ### Tunning
 > Algumas tratativas para caixas que estão nerando muito recurso e entrando em conserve mode
