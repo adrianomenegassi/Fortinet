@@ -26,6 +26,9 @@ execute log display
 diagnose sniffer packet any 'host 10.10.10.10' 4 10
 ```
 ```
+diagnose sniffer packet any 'not host 10.10.10.10' 4 10
+```
+```
 diagnose network sniffer port1 'port 53' 6
 ```
 ```
