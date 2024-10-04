@@ -25,6 +25,12 @@ execute log display
 ```
 diagnose sniffer packet any 'host 10.10.10.10' 4 10
 ```
+```
+diagnose network sniffer port1 'port 53' 6
+```
+```
+diagnose sniffer packet any 'src net 172.1.0.0/24 and dst net 10.10.0.0/24 and ip and not host 172.1.1.255' 6
+```
 ### Debug
 > limpar filtros debug
 ```
