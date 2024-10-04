@@ -229,7 +229,7 @@ diagnose debug application dhcps -1
 
 diagnose sniffer packet P_A06_CALL_VOZ 'port 67 and port 68' 3
 
-# reserva Unicesumar Acesso
+# reserva Acesso
 config system dhcp server
  edit 9
  config reserved-address
