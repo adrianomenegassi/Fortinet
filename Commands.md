@@ -70,8 +70,14 @@ execute ha failover set 1
 ```
 execute ha failover unset 1
 ```
-
-
+### Quarentena
+> Verificar e deletar maquina na quarentena
+```
+diagnose user quarantine list
+```
+```
+diagnose user quarantine delete src4 10.10.10.10
+```
 
 ### Tunning
 > Algumas tratativas para caixas que estão nerando muito recurso e entrando em conserve mode
