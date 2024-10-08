@@ -1,4 +1,4 @@
-[Link Comandos Uteis](https://github.com/adrianomenegassi/Fortinet/pull/2/commits/61df68f97b8a27feb42d15349ff82254c196b0d6)/br
+[Link Comandos Uteis](https://github.com/adrianomenegassi/Fortinet/pull/2/commits/61df68f97b8a27feb42d15349ff82254c196b0d6)/p
 [Mais Comandos GITHUB](https://gist.github.com/cetinajero/1effb04ee9ae9fc6f65faaf43d4bff9b)
 
 ### Cheatsheet for FortiGate Command Line Interface CLI
