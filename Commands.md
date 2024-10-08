@@ -1,4 +1,5 @@
 [Link Comandos Uteis](https://github.com/adrianomenegassi/Fortinet/pull/2/commits/61df68f97b8a27feb42d15349ff82254c196b0d6)
+Mais Comandos GITHUB](https://gist.github.com/cetinajero/1effb04ee9ae9fc6f65faaf43d4bff9b)
 
 ### Cheatsheet for FortiGate Command Line Interface CLI
  > Sites Uteis
@@ -30,6 +31,9 @@ diagnose sniffer packet any 'not host 10.10.10.10' 4 10
 ```
 ```
 diagnose network sniffer port1 'port 53' 6
+```
+```
+diag sniffer packet internal 'udp and port 1812 and host 192.168.0.130 and (192.168.0.1 or 192.168.0.2)' 6 0 l
 ```
 ```
 diagnose sniffer packet any 'src net 172.1.0.0/24 and dst net 10.10.0.0/24 and ip and not host 172.1.1.255' 6
