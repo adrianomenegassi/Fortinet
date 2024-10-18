@@ -61,6 +61,12 @@ get vpn ike gateway | grep -f "name\|addr"
 ```
 get vpn ike gateway | grep -f
 ```
+### FortiSwitch
+> Listar informações dos Switchs
+```
+execute switch-controller get-conn-status
+```
+
 ### Chavear Caixa HA
 > Verificar integridade e chavear entre as caixas HA
 ```
@@ -80,7 +86,19 @@ diagnose user quarantine list
 ```
 diagnose user quarantine delete src4 10.10.10.10
 ```
-
+### Buscar MAC ou Info relacionadas ao MAC
+> Mostrar tabela ARP
+```
+get system arp
+```
+> Mostrar tebela de MAC e portas Fortiswitch
+```
+diagnose switch-controller mac-cache show
+```
+> Informações relacionadas ao MAC especifico
+```
+diagnose user-device-store device memory query 2 mac {mac address}
+```
 ### Tunning
 > Algumas tratativas para caixas que estão nerando muito recurso e entrando em conserve mode
 ```
