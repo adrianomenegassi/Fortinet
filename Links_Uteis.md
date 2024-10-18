@@ -3,4 +3,5 @@
 [DIAG GITHUB](https://gist.github.com/cetinajero/1effb04ee9ae9fc6f65faaf43d4bff9b) <br/><br/>
 [Voice Vlan Fortiswitch](https://community.fortinet.com/t5/FortiGate/Technical-Tip-Managed-FortiSwitch-LLDP-voice-VLAN-auto-tagging/ta-p/245678)<br/><br/>
 [Cheatsheet FortiGate CLI](https://www.ideaio.ch/posts/cheatsheet-fortigate-cli.html)<br/><br/>
-[Troubleshooting Tip](http://kb.fortinet.com/kb/viewContent.do?externalId=11186)
+[Troubleshooting Tip](http://kb.fortinet.com/kb/viewContent.do?externalId=11186)<br/><br/>
+[Fortigate debug and diagnose commands complete cheat sheet](https://github.com/yuriskinfo/cheat-sheets/blob/master/cheat-sheets/Fortigate-debug-diagnose-complete-cheat-sheet.adoc)
