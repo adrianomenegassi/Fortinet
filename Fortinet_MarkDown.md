@@ -47,6 +47,7 @@ diagnose debug reset
 > Alguns exemplos debug
 ```
 diagnose debug flow filter addr 10.10.10.10
+diagnose debug duration 1 (minute)
 diagnose debug flow show function-name enable
 diagnose debug flow trace start 100
 diagnose debug enable
