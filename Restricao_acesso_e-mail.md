@@ -11,6 +11,7 @@ config firewall address
     next
 end
 ```
+```
 config web-proxy profile
    edit "SaaS-Tenant-Restriction"
         set header-client-ip pass
@@ -30,7 +31,7 @@ config web-proxy profile
                 set base64-encoding disable
                 set add-option new
                 set protocol https http
-                set content "sicoob.com.br" >>> dominio de e-mail
+                **set content "sicoob.com.br"** >>> dominio de e-mail
             next
             edit 2
                 set name "Restrict-Access-Context" 
@@ -39,7 +40,7 @@ config web-proxy profile
                 set base64-encoding disable
                 set add-option new
                 set protocol https http
-                set content "b417b620-2ae9-4a83-ab6c-7fbd828bda1d" >>> RESTRICT_ID Tenante
+                **set content "b417b620-2ae9-4a83-ab6c-7fbd828bda1d"** >>> RESTRICT_ID Tenante
             next
 			   edit 3
                 set name "sec-Restrict-Tenant-Access-Policy"
@@ -67,12 +68,12 @@ config firewall policy
 		set action accept
 		set schedule "always"
 		set service "ALL"
-		set webproxy-profile "SaaS-Tenant-Restriction"  >>> Adicionar na regra via CLI
+		**set webproxy-profile "SaaS-Tenant-Restriction"**  >>> Adicionar na regra via CLI
 		set utm-status enable
 		set utm-inspection-mode proxy
 		set logtraffic all
 		set webfilter-profile "blocktest2" 
-        set application-list "g-default"
+                set application-list "g-default"
 		set profile-protocol-options "protocol"
 		set ssl-ssh-profile "protocols"
 		set nat enable
