@@ -42,7 +42,7 @@ config web-proxy profile
                 set protocol https http
                 **set content "b417b620-2ae9-4a83-ab6c-7fbd828bda1d"** >>> RESTRICT_ID Tenante
             next
-			   edit 3
+            edit 3
                 set name "sec-Restrict-Tenant-Access-Policy"
                 set dstaddr "login.live.com"
                 set action add-to-request
@@ -51,7 +51,7 @@ config web-proxy profile
                 set protocol https http
                 set content "restrict-msa"
             next
-		end	
+        end	
 	next		
 end			
 ```
