@@ -2,7 +2,7 @@
 [Restrição por domino e-mail 2](https://docs.fortinet.com/document/fortigate/7.6.0/administration-guide/8049/restricted-saas-access)</br>
 
 ### Restrição
- > Exemplo __4379__ **UAD**
+ > Exemplo 4379UAD
 ```
 config firewall address
     edit "login.live.com"
@@ -40,7 +40,7 @@ config web-proxy profile
                 set base64-encoding disable
                 set add-option new
                 set protocol https http
-                **set content "b417b620-2ae9-4a83-ab6c-7fbd828bda1d"** >>> RESTRICT_ID Tenante
+                __set content "b417b620-2ae9-4a83-ab6c-7fbd828bda1d"__ >>> RESTRICT_ID Tenante
             next
             edit 3
                 set name "sec-Restrict-Tenant-Access-Policy"
