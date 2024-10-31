@@ -11,7 +11,6 @@ set miglogd-children 1
 set wad-worker-count 1
 set scanunit-count 2
 set udp-idle-timer 90
-set internet-service-database on-demand
 end
 
 config system dns
@@ -25,19 +24,6 @@ config system fortiguard
 set webfilter-cache-ttl 500
 end
  ```
-
-> Alterar Update automatico do fortiguard </br></br>
-
-```
-config system autoupdate schedule
-set frequency daily
-set time 07:60
-end
-```
-</br></br>
-
-![image](https://github.com/user-attachments/assets/af521807-b3d9-47d6-bccb-db0492d67a14) </br></br></br></br>
-
 >  Alterar atualização do Internet Service Database para atualizar apenas serviços utilizados em politicas
 
 ```
@@ -48,5 +34,20 @@ end
 ```
 diagnose autoupdate versions | grep Internet -A 6
 ```
+
+> Alterar Update automatico do fortiguard </br></br>
+
+```
+config system autoupdate schedule
+set frequency daily
+set time 07:60
+end
+```
+
+</br></br>
+
+![image](https://github.com/user-attachments/assets/af521807-b3d9-47d6-bccb-db0492d67a14) </br></br></br></br>
+
+
 
 
