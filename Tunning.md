@@ -33,7 +33,7 @@ end
 
 ```
 config system global
-    set internet-service-database on-demand
+set internet-service-database on-demand
 end
 ```
 ```
