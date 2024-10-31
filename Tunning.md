@@ -19,9 +19,9 @@ set dns-cache-limit 300
 end
  ```
 
-> Alterar Update automatico do fortiguard </br>
+> Alterar Update automatico do fortiguard </br></br>
 
-![image](https://github.com/user-attachments/assets/af521807-b3d9-47d6-bccb-db0492d67a14) </br>
+![image](https://github.com/user-attachments/assets/af521807-b3d9-47d6-bccb-db0492d67a14) </br></br></br></br>
 
 >  Alterar atualização do Internet Service Database para atualizar apenas serviços utilizados em politicas
 
