@@ -30,7 +30,8 @@ config system global
     set internet-service-database on-demand
 end
 ```
+```
 diagnose autoupdate versions | grep Internet -A 6
 ```
 
-```
+
