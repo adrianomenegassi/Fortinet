@@ -18,6 +18,11 @@ set dns-cache-limit 300
 set dns-cache-ttl 300
 end
 ```
+
+> ###########ONDE TEM SSL VPN HABILITADA#######
+```
+set sslvpn-max-worker-count 1 
+```
 > Time de cache para consulta do TTL no fortiguard
 ```
 config system fortiguard
