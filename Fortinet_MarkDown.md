@@ -19,6 +19,16 @@ execute log filter reset
 execute log filter field msg "reserse path check fail, drop"
 execute log display
 ```
+### Diag
+> Listar todos update servicos Fortiguard
+```
+diagnose autoupdate versions
+```
+>  Listar update servicos Fortiguard do IPs
+```
+diagnose autoupdate versions | grep "Attack Definitions" -A 6
+```
+
 ### Sniffer
 > exemplo sniffer com verbose
 ```
