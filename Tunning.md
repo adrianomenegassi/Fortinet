@@ -29,17 +29,6 @@ config system fortiguard
 set webfilter-cache-ttl 500
 end
  ```
->  Alterar atualização do Internet Service Database para atualizar apenas serviços utilizados em politicas
-
-```
-config system global
-set internet-service-database on-demand
-end
-```
-```
-diagnose autoupdate versions | grep Internet -A 6
-```
-
 > Alterar Update automatico do fortiguard </br></br>
 
 ```
