@@ -19,10 +19,12 @@ set dns-cache-limit 300
 end
  ```
 
-> Alterar Update automatico do fortiguard 
-![image](https://github.com/user-attachments/assets/af521807-b3d9-47d6-bccb-db0492d67a14)
+> Alterar Update automatico do fortiguard </br>
+
+![image](https://github.com/user-attachments/assets/af521807-b3d9-47d6-bccb-db0492d67a14) </br>
 
 >  Alterar atualização do Internet Service Database para atualizar apenas serviços utilizados em politicas
+
 ```
 config system global
     set internet-service-database on-demand
