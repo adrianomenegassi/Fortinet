@@ -1,4 +1,6 @@
 
+[Referencia ZTNA EMS Saas](https://fortinetweb.s3.amazonaws.com/docs.fortinet.com/v2/attachments/f2e44070-1152-11ee-8e6d-fa163e15d75b/Zero_Trust_Network_Access-7.2.5-ZTNA_CASB_Protection_for_SaaS_Apps.pdf)
+
 ### FORTIEMS 
 > Configurações necessárias no FortiEMS</br></br>
 
