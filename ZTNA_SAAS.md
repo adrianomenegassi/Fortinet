@@ -1,10 +1,10 @@
 
 ### FORTIEMS 
-> Configurações necessárias no FortiEMS<\br><\br>
+> Configurações necessárias no FortiEMS</br></br>
 
-Endpint Profiles > ZTNA Destinations<\br><\br><\br><\br>
+Endpint Profiles > ZTNA Destinations</br></br></br></br>
 
-![image](https://github.com/user-attachments/assets/315a3980-255f-4919-84ac-67e1ac4149f3)<\br><\br><\br><\br>
+![image](https://github.com/user-attachments/assets/315a3980-255f-4919-84ac-67e1ac4149f3)</br></br></br></br>
 
 
 ### FORTIGATE 
