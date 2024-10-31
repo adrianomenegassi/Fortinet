@@ -1,7 +1,7 @@
 
 
 ### Tunning
-> Algumas tratativas para caixas que estão nerando muito recurso e entrando em conserve mode
+> Algumas tratativas para caixas que estão onerando muito recurso e entrando em conserve mode
 ```
 config system global
 set memory-use-threshold-extreme 97
