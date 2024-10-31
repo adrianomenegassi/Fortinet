@@ -111,8 +111,4 @@ diagnose switch-controller mac-cache show
 diagnose user-device-store device memory query 2 mac {mac address}
 ```
 
-> ###########ONDE TEM SSL VPN HABILITADA#######
-```
-set sslvpn-max-worker-count 1 
-```
 
