@@ -1,0 +1,106 @@
+########SCRIPT PARA APLICACAO DE COMANDOS EM VARIOS FORTIGATES AO MESMO TEMPO############
+import paramiko
+import getpass
+import time
+
+# Definindo grupos de firewalls
+firewall_groups = {
+    "Grupo1": ['10.234.38.1', '10.234.39.1'],
+    "Grupo2": ['10.234.40.1', '10.234.41.1'],
+    "Grupo3": ['10.234.42.1']  # Adicione mais grupos conforme necessario
+}
+
+# Exibindo os grupos disponíveis
+print("Grupos de firewalls disponíveis:")
+for group in firewall_groups:
+    print(f"- {group}")
+
+# Solicita ao usuário que escolha um grupo
+selected_group = input("Digite o nome do grupo que deseja executar (ou 'todos' para executar em todos): ")
+
+# Solicita usuário e senha
+username = input("Digite o usuário: ")
+password = getpass.getpass("Digite a senha: ")
+
+# Comando a ser executado
+command = """
+config system autoupdate schedule
+    set frequency daily
+    set time 07:60
+end
+show system autoupdate schedule
+"""
+
+# Tempo de espera entre as conexões (em segundos)
+wait_time = 3  # Ajuste este valor conforme necessário
+
+# Lista para armazenar hosts com falhas
+failed_hosts = []
+
+# Determina quais firewalls executar com base na seleção
+if selected_group.lower() == "todos":
+    firewalls = [ip for group in firewall_groups.values() for ip in group]
+else:
+    firewalls = firewall_groups.get(selected_group, [])
+
+if not firewalls:
+    print("Nenhum firewall encontrado para o grupo selecionado.")
+else:
+    for ip in firewalls:
+        print(f"Conectando ao firewall: {ip}")
+        try:
+            # Cria uma nova instância de SSHClient
+            client = paramiko.SSHClient()
+            # Adiciona a chave do host à lista de conhecidas
+            client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+           # Tentativa de conexão na porta padrão 22
+            try:
+                client.connect(ip, username=username, password=password, port=22)
+            except Exception as e:
+                print(f"Falha na conexão na porta 22: {e}. Tentando na porta 22022...")
+                # Tenta novamente na porta 22022
+                try:
+                    client.connect(ip, username=username, password=password, port=22022)
+                except Exception as e:
+                    print(f"Falha na conexão na porta 22022: {e}")
+                    # Registra o firewall como falhou
+                    failed_hosts.append((ip, f"Falha de conexão nas portas 22 e 22022"))
+                    continue
+
+            # Executa o comando
+            stdin, stdout, stderr = client.exec_command(command)
+
+            # Lê a saída do comando
+            output = stdout.read().decode()
+            errors = stderr.read().decode()
+
+            # Exibe a saída com o nome do grupo
+            print(f"\nSaída do {selected_group} no firewall {ip}:\n{output}")
+            if errors:
+                print(f"Erros do {selected_group} no firewall {ip}:\n{errors}")
+                # Registra o firewall com erro na execução
+                failed_hosts.append((ip, f"Erro no comando: {errors}"))
+
+        except Exception as e:
+            print(f"Falha ao conectar ao {ip}: {e}")
+            # Registra o firewall com falha na conexão
+            failed_hosts.append((ip, f"Falha de conexão: {e}"))
+        finally:
+            # Fecha a conexão SSH
+            client.close()
+
+        # Espera o tempo definido antes de conectar ao próximo firewall
+        print(f"Aguardando {wait_time} segundos antes da próxima conexão...")
+        time.sleep(wait_time)
+
+# Mensagem final após a execução de todos os comandos
+print("Todos os comandos foram executados.")
+
+# Exibe os hosts que falharam
+if failed_hosts:
+    print("\nHosts que apresentaram falhas:")
+    for host, error in failed_hosts:
+        print(f"IP: {host} - Erro: {error}")
+else:
+    print("Nenhum erro ou falha de conexão foi encontrado.")
