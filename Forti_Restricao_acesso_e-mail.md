@@ -31,7 +31,7 @@ config web-proxy profile
                 set base64-encoding disable
                 set add-option new
                 set protocol https http
-                set content "sicoob.com.br" >>> dominio de e-mail
+                set content "dominiocorp.com.br" >>> dominio de e-mail
             next
             edit 2
                 set name "Restrict-Access-Context" 
@@ -40,7 +40,7 @@ config web-proxy profile
                 set base64-encoding disable
                 set add-option new
                 set protocol https http
-                set content "b417b620-2ae9-4a83-ab6c-7fbd828bda1d" >>> RESTRICT_ID Tenante
+                set content "b417b620-ug7t-4a83-ab6c-7fbd828bda1d" >>> RESTRICT_ID Tenante
             next
             edit 3
                 set name "sec-Restrict-Tenant-Access-Policy"
