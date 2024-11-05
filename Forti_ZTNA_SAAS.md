@@ -16,7 +16,7 @@ config firewall vip
     edit "teste_ZTNA"
         set uuid 00af4d36-9622-51ef-0803-3a226f0950c7
         set type access-proxy
-        set extip 131.108.147.241
+        set extip 141.18.147.241
         set extintf "port1"
         set server-type https
         set extport 8843
