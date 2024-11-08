@@ -1,6 +1,6 @@
 
 
-### Tunning
+### Tunninghhhh
 > Algumas tratativas para caixas que estão onerando muito recurso e entrando em conserve mode
 ```
 config system global
