@@ -2,7 +2,7 @@
 [Restrição por domino e-mail 2](https://docs.fortinet.com/document/fortigate/7.6.0/administration-guide/8049/restricted-saas-access)</br>
 
 ### Restrição
- > Exemplo 4379UAD
+ > Exemplo 
 ```
 config firewall address
     edit "login.live.com"
