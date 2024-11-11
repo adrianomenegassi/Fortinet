@@ -1,6 +1,10 @@
 
 
 ### Tunning
+> Comando para puxar o historico de quantas vezes o firewall entrou em conserve mode
+```
+diagnose debug crashlog read | grep "extreme low memory mode"
+```
 > Algumas tratativas para caixas que estão onerando muito recurso e entrando em conserve mode
 ```
 config system global
